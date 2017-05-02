@@ -26,7 +26,7 @@ zip -j -9 $FUNCTION_SLUG.zip dist/*.js
 aws s3 cp cfn/$FUNCTION_SLUG.yml s3://${S3PATH}/
 aws s3 cp $FUNCTION_SLUG.zip s3://${S3PATH}/
 
-aws cloudformation create-stack --stack-name $stack_name --template-url https://s3.amazonaws.com/$S3PATH/$FUNCTION_SLUG.yml --parameters ParameterKey=S3Bucket,ParameterValue=$bucket ParameterKey=S3Prefix,ParameterValue=$prefix ParameterKey=FunctionName,ParameterValue=$func_name ParameterKey=RoleName,ParameterValue=$role_name --capabilities CAPABILITY_NAMED_IAM
+aws cloudformation create-stack --stack-name $stack_name --template-url https://s3.amazonaws.com/$S3PATH/$FUNCTION_SLUG.yml --parameters ParameterKey=S3Bucket,ParameterValue=$bucket ParameterKey=S3Prefix,ParameterValue=$prefix ParameterKey=FunctionName,ParameterValue=$func_name ParameterKey=RoleName,ParameterValue=$role_name --timeout-in-minutes 5 --capabilities CAPABILITY_NAMED_IAM
 aws cloudformation wait stack-create-complete --stack-name $stack_name
 
 rm -f $FUNCTION_SLUG.zip

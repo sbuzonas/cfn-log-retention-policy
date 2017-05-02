@@ -4,13 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --optimize-minimize"
+    "build": "webpack"
   },
   "dependencies": {
     "@fancyguy/cfn-response": "^0.5.0"
   },
   "devDependencies": {
-    "@types/node": "^7.0.14",
+    "@types/bluebird": "^3.5.3",
+    "@types/node": "^7.0.15",
     "aws-sdk": "^2.48.0",
     "ts-loader": "^2.0.3",
     "typescript": "^2.3.2",
