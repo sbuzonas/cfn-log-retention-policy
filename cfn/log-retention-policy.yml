@@ -1,0 +1,75 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: CloudFormation resource to define CloudWatch Logs retention policies
+
+Parameters:
+  
+  FunctionName:
+    Description: Name of the Lambda function
+    Type: String
+    Default: LogRetentionPolicy
+
+  RoleName:
+    Description: Name of the Lambda execution role
+    Type: String
+    Default: LogRetentionPolicyExecutionRole
+
+  S3Bucket:
+    Description: Bucket that stores the function code
+    Type: String
+
+  S3Prefix:
+    Description: Path to the function in S3
+    Type: String
+
+Resources:
+
+  Role:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Ref RoleName
+      Path: /service-role/lambda/cloudformation-resources/
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          Effect: Allow
+          Action: sts:AssumeRole
+          Principal:
+            Service:
+              - lambda.amazonaws.com
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: ManageLogRetentionPolicy
+          PolicyDocument:
+            Statement:
+              Effect: Allow
+              Action:
+                - logs:DeleteRetentionPolicy
+                - logs:PutRetentionPolicy
+              Resource: '*'
+
+  Function:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Ref FunctionName
+      Code:
+        S3Bucket: !Ref S3Bucket
+        S3Key: !Sub ${S3Prefix}/log-retention-policy.zip
+      Handler: resource.handler
+      Role: !GetAtt Role.Arn
+      Runtime: nodejs6.10
+
+  LogRetentionPolicy:
+    Type: Custom::LogRetentionPolicy
+    Properties:
+      ServiceToken: !GetAtt Function.Arn
+      LogGroup: !Sub /aws/lambda/${Function}
+      RetentionInDays: 7
+
+Outputs:
+
+  FunctionArn:
+    Value: !GetAtt Function.Arn
+    Export:
+      Name: !Ref FunctionName
