@@ -53,6 +53,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: !Ref FunctionName
+      Description: CloudFormation resource for CloudWatch Logs retention policies
       Code:
         S3Bucket: !Ref S3Bucket
         S3Key: !Sub ${S3Prefix}/log-retention-policy.zip
