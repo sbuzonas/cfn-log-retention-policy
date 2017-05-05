@@ -9,6 +9,7 @@ export class LogGroupNotFound extends Error {
   }
 }
 
+
 export class CloudWatchLogsClient {
   client: CloudWatchLogs;
 
@@ -36,7 +37,7 @@ export class CloudWatchLogsClient {
             }
           }
           if (!found) {
-            reject(new Error('LogGroup named "' + name + '" was not found'));
+            reject(new LogGroupNotFound('LogGroup named "' + name + '" was not found'));
           }
         }
       });
