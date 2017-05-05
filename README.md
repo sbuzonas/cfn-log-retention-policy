@@ -61,7 +61,7 @@ The name of the log group. Creates a new log group if one does not already exist
 
 > ##### Note
 > Changing the name requires replacement and will not delete the old log group.
-> Use the `AWS::Logs::LogGroup` instead if you are in need of managing log groups.
+> Use the [`AWS::Logs::LogGroup`](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html) instead if you are in need of managing log groups.
 
 *Required*: Yes
 
