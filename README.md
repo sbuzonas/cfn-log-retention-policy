@@ -21,13 +21,13 @@ To declare this entity in your AWS CloudFormation template, use the following sy
 
 <big><pre>
 {
-  "Type" : "Custom::LogRetentionPolicy",
-  "Properties" : {
-    "Version": "1.0",
-    "[ServiceToken](#servicetoken)": String,
-    "[LogGroup](#loggroup)": String,
-    "[RetentionInDays](#retentionindays)": Integer
-  }
+&nbsp;&nbsp;&nbsp;&nbsp;"Type" : "Custom::LogRetentionPolicy",
+&nbsp;&nbsp;&nbsp;&nbsp;"Properties" : {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Version": "1.0",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"[ServiceToken](#servicetoken)": String,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"[LogGroup](#loggroup)": String,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"[RetentionInDays](#retentionindays)": Integer
+&nbsp;&nbsp;&nbsp;&nbsp;}
 }
 </big></pre>
 
@@ -36,11 +36,10 @@ To declare this entity in your AWS CloudFormation template, use the following sy
 <big><pre>
 Type: Custom::LogRetentionPolicy
 Properties:
-  Version: '1.0'
-  [ServiceToken](#servicetoken): String
-  [LogGroup](#loggroup): String
-  [RetentionInDays](#retentionindays): Integer
-</big></pre>
+&nbsp;&nbsp;&nbsp;&nbsp;Version: '1.0'
+&nbsp;&nbsp;&nbsp;&nbsp;[ServiceToken](#servicetoken): String
+&nbsp;&nbsp;&nbsp;&nbsp;[LogGroup](#loggroup): String
+&nbsp;&nbsp;&nbsp;&nbsp;[RetentionInDays](#retentionindays): Integer</pre></big>
 
 ### Permissions
 
