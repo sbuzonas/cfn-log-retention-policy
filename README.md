@@ -43,6 +43,41 @@ Properties:
 
 ### Permissions
 
+##### `logs:DescribeLogGroups`
+
+The resource handler searches existing log groups to ensure it exists before it can set a retention policy.
+
+*Resource access*: all CloudWatch Logs ARNs
+
+*Lifecycle events*: `Create`, `Update`
+
+##### `logs:CreateLogGroup`
+
+> ###### Note
+> This permission is only required if you are setting retention policies for log groups that do not already exist.
+
+The resource handler needs an existing log group to apply a retention policy. It creates one if it doesn't exist.
+
+*Resource access*: The ARN for the log group specified in the [LogGroup](#loggroup) property.
+
+*Lifecycle events*: `Create`, `Update` *Only if the group doesn't exist*
+
+##### `logs:PutRetentionPolicy`
+
+This is the primary purpose of this resource. It is required for the resource to work.
+
+*Resource access*: The ARN for the log group specified in the [LogGroup](#loggroup) property.
+
+*Lifecycle events*: `Create`, `Update`
+
+##### `logs:DeleteRetentionPolicy`
+
+This permission is required when removing the resource.
+
+*Resource access*: The ARN for the log group specified in the [LogGroup](#loggroup) property.
+
+*Lifecycle events*: `Delete`
+
 ### Properties
 
 ###### ServiceToken
@@ -61,7 +96,7 @@ The name of the log group. Creates a new log group if one does not already exist
 
 > ##### Note
 > Changing the name requires replacement and will not delete the old log group.
-> Use the [`AWS::Logs::LogGroup`](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html) instead if you are in need of managing log groups.
+> Use the `AWS::Logs::LogGroup` instead if you are in need of managing log groups.
 
 *Required*: Yes
 
